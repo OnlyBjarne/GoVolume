@@ -1,34 +1,38 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"html/template"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/getlantern/systray"
 )
 
-//globals for functions for knob and buttons
-var knobModes = []functionStruct{{"System volume", nil, true}, {"Application volume", []string{"Spotify.exe"}, false}}
-var buttonModes = []functionStruct{{"Music Control", nil, true}, {"Keystroke", []string{"alt+F4", "F"}, false}, {"Toggle sound device", []string{"Headset", "Speakers", "Earbuds"}, false}}
-
-//SettingsTemplate exports to the template for settings
-type SettingsTemplate struct {
-	CountKnobs      []struct{}
-	KnobModesList   []functionStruct
-	ButtonModesList []functionStruct
-}
-
-type functionStruct struct {
-	Text        string
-	Application []string
-	Active      bool
+//SettingsStruct to populate html from json config file
+type SettingsStruct struct {
+	Settings []struct {
+		Encoder []struct {
+			Knob []struct {
+				Text        string   `json:"text"`
+				Application []string `json:"Application"`
+				Active      bool     `json:"Active"`
+			} `json:"Knob,omitempty"`
+			Button []struct {
+				Text        string   `json:"text"`
+				Application []string `json:"Application"`
+				Active      bool     `json:"Active"`
+			} `json:"Button,omitempty"`
+		} `json:"encoder"`
+	} `json:"Settings"`
 }
 
 func main() {
 	systray.Run(onReady, onExit)
+
 }
 
 func onReady() {
@@ -42,7 +46,7 @@ func onReady() {
 	//Add server for settings-manager in webapp
 	indexHandler := http.NewServeMux()
 	indexHandler.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		p := SettingsTemplate{CountKnobs: make([]struct{}, 4), KnobModesList: knobModes, ButtonModesList: buttonModes}
+		p := getSettings()
 		t, _ := template.ParseFiles("SettingsTemplate.html")
 		t.Execute(w, p)
 	})
@@ -59,7 +63,7 @@ func onReady() {
 		select {
 		case <-mOpen.ClickedCh:
 			fmt.Println("Config clicked")
-			log.Fatal(srv.ListenAndServe())
+			go log.Fatal(srv.ListenAndServe())
 		case <-mQuit.ClickedCh:
 			fmt.Println("Quitting")
 			systray.Quit()
@@ -76,4 +80,20 @@ func getIcon(s string) []byte {
 		fmt.Print(err)
 	}
 	return b
+}
+
+func getSettings() SettingsStruct {
+	settingsFile, err := os.Open("settings.cfg.default")
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	defer settingsFile.Close()
+
+	byteValue, err := ioutil.ReadAll(settingsFile)
+	var settings SettingsStruct
+
+	json.Unmarshal(byteValue, &settings)
+	fmt.Println(settings.Settings[0].Encoder[1].Knob[1].Text)
+	return settings
 }

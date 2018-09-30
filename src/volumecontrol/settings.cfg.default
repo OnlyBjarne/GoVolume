@@ -1,0 +1,220 @@
+{
+    "Settings": [
+        {
+            "Encoder": [
+                {
+                    "Knob": [
+                        {
+                            "text": "System Volume",
+                            "Application": [],
+                            "Active": true
+                        },
+                        {
+                            "text": "Application Volume",
+                            "Application": [
+                                "app.exe",
+                                "app2.exe"
+                            ],
+                            "Active": false
+                        }
+                    ]
+                },
+                {
+                    "Button": [
+                        {
+                            "text": "Shortcut",
+                            "Application": [],
+                            "Active": false
+                        },
+                        {
+                            "text": "Macro",
+                            "Application": [
+                                "app.exe",
+                                "app2.exe"
+                            ],
+                            "Active": true
+                        },
+                        {
+                            "text": "Keystroke",
+                            "Application": [
+                                "F"
+                            ],
+                            "Active": false
+                        },
+                        {
+                            "text": "Cycle sounddevices",
+                            "Application": [
+                                "Device1",
+                                "Device2",
+                                "Device3"
+                            ],
+                            "Active": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Encoder": [
+                {
+                    "Knob": [
+                        {
+                            "text": "System Volume",
+                            "Application": [],
+                            "Active": true
+                        },
+                        {
+                            "text": "Application Volume",
+                            "Application": [
+                                "app.exe",
+                                "app2.exe"
+                            ],
+                            "Active": false
+                        }
+                    ]
+                },
+                {
+                    "Button": [
+                        {
+                            "text": "Shortcut",
+                            "Application": [],
+                            "Active": false
+                        },
+                        {
+                            "text": "Macro",
+                            "Application": [
+                                "app.exe",
+                                "app2.exe"
+                            ],
+                            "Active": true
+                        },
+                        {
+                            "text": "Keystroke",
+                            "Application": [
+                                "F"
+                            ],
+                            "Active": false
+                        },
+                        {
+                            "text": "Cycle sounddevices",
+                            "Application": [
+                                "Device1",
+                                "Device2",
+                                "Device3"
+                            ],
+                            "Active": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Encoder": [
+                {
+                    "Knob": [
+                        {
+                            "text": "System Volume",
+                            "Application": [],
+                            "Active": true
+                        },
+                        {
+                            "text": "Application Volume",
+                            "Application": [
+                                "app.exe",
+                                "app2.exe"
+                            ],
+                            "Active": false
+                        }
+                    ]
+                },
+                {
+                    "Button": [
+                        {
+                            "text": "Shortcut",
+                            "Application": [],
+                            "Active": false
+                        },
+                        {
+                            "text": "Macro",
+                            "Application": [
+                                "app.exe",
+                                "app2.exe"
+                            ],
+                            "Active": true
+                        },
+                        {
+                            "text": "Keystroke",
+                            "Application": [
+                                "F"
+                            ],
+                            "Active": false
+                        },
+                        {
+                            "text": "Cycle sounddevices",
+                            "Application": [
+                                "Device1",
+                                "Device2",
+                                "Device3"
+                            ],
+                            "Active": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Encoder": [
+                {
+                    "Knob": [
+                        {
+                            "text": "System Volume",
+                            "Application": [],
+                            "Active": true
+                        },
+                        {
+                            "text": "Application Volume",
+                            "Application": [
+                                "app.exe",
+                                "app2.exe"
+                            ],
+                            "Active": false
+                        }
+                    ]
+                },
+                {
+                    "Button": [
+                        {
+                            "text": "Shortcut",
+                            "Application": [],
+                            "Active": false
+                        },
+                        {
+                            "text": "Macro",
+                            "Application": [
+                                "app.exe",
+                                "app2.exe"
+                            ],
+                            "Active": true
+                        },
+                        {
+                            "text": "Keystroke",
+                            "Application": [
+                                "F"
+                            ],
+                            "Active": false
+                        },
+                        {
+                            "text": "Cycle sounddevices",
+                            "Application": [
+                                "Device1",
+                                "Device2",
+                                "Device3"
+                            ],
+                            "Active": false
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

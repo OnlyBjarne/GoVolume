@@ -1,64 +1,69 @@
 <!doctype html>
 <html>
-	<head>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-		
-		<!-- jQuery library -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<!-- Popper JS -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-		<!-- Latest compiled JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-	</head>
-	<body>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
-	<div class="container">
-		<!-- Nav tabs -->
-        {{$knobmodes := .KnobModesList }}
-        {{$buttonmodes := .ButtonModesList}}
-		<ul class="nav nav-tabs">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        {{ $encoders := .Settings }}
+        {{len $encoders}}
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
             <li class="active"><a class="nav-link active" data-toggle="tab" href="#About">About</a>
             </li>
-            {{ range $i,$e := .CountKnobs }}
+            {{ range $i,$e := .Settings }}
             <li>
                 <a class="nav-link" data-toggle="tab" href="#knob{{$i}}">Knob {{$i}}</a>
             </li>
             {{end}}
-		</ul>
+        </ul>
 
-		<!-- Tab panes -->
-		<div class="tab-content">
+
+        <!--Tab panes-->
+        <div class="tab-content">
             <div id="About" class="tab-pane active">
                 This is an about page, this is a WIP-and our first application written in golang
             </div>
-            {{ range $i,$e := .CountKnobs }}
+            {{ $knobMode := .Settings}}
+            {{ range $i, $element := .Settings }}
+            {{ $knobMode = .Settings}}
             <div id="knob{{$i}}" class="tab-pane fade>">
                 <div class="form-group col-sm-6">
                     <label for="knob{{$i}}select">Knob {{$i}} function:</label>
                     <select class="form-control" id="knob{{$i}}select">
-                    {{ range $index, $element := $knobmodes }}
-                        <option {{if $element.Active}}selected{{end}}>{{$element.Text}}</option>
-                    {{ end }}
+                        <option></option>
                     </select>
-
                     <label for="button{{$i}}select">Button {{$i}} function:</label>
                     <select class="form-control" id="button{{$i}}select">
-                    {{ range $index, $element := $buttonmodes }}
-                        <option {{if $element.Active}}selected{{end}}>{{$element.Text}}</option>
-                    {{ end }}
+                        
                     </select>
                 </div>
             </div>
+            {{else}}
+            You done goofed
             {{end}}
         </div>
-             
-		<button class="btn btn-success" type="button">Save</button>
-		<button class="btn btn-warning" type="button">Apply</button>
-		<button class="btn btn-danger" type="button" onclick="">Cancel</button>
-	</div>
-	</body>
+
+
+
+        <button class="btn btn-success" type="button">Save</button>
+        <button class="btn btn-warning" type="button">Apply</button>
+        <button class="btn btn-danger" type="button" onclick="">Cancel</button>
+    </div>
+</body>
+
 </html>
