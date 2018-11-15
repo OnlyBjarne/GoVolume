@@ -19,17 +19,13 @@
 <body>
 
     <div class="container">
-        {{ $encoders := .Settings }}
-        {{len $encoders}}
         <!-- Nav tabs -->
         <ul class="nav nav-tabs">
             <li class="active"><a class="nav-link active" data-toggle="tab" href="#About">About</a>
             </li>
-            {{ range $i,$e := .Settings }}
             <li>
-                <a class="nav-link" data-toggle="tab" href="#knob{{$i}}">Knob {{$i}}</a>
+                <a class="nav-link" data-toggle="tab" href="#knob">Knob </a>
             </li>
-            {{end}}
         </ul>
 
 
@@ -38,24 +34,19 @@
             <div id="About" class="tab-pane active">
                 This is an about page, this is a WIP-and our first application written in golang
             </div>
-            {{ $knobMode := .Settings}}
-            {{ range $i, $element := .Settings }}
-            {{ $knobMode = .Settings}}
-            <div id="knob{{$i}}" class="tab-pane fade>">
+
+            <div id="knob" class="tab-pane fade>">
                 <div class="form-group col-sm-6">
-                    <label for="knob{{$i}}select">Knob {{$i}} function:</label>
-                    <select class="form-control" id="knob{{$i}}select">
+                    <label for="knobselect">Knob  function:</label>
+                    <select class="form-control" id="knobselect">
                         <option></option>
                     </select>
-                    <label for="button{{$i}}select">Button {{$i}} function:</label>
-                    <select class="form-control" id="button{{$i}}select">
+                    <label for="buttonselect">Button function:</label>
+                    <select class="form-control" id="buttonselect">
                         
                     </select>
                 </div>
             </div>
-            {{else}}
-            You done goofed
-            {{end}}
         </div>
 
 
