@@ -15,39 +15,41 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <!-- Vue.js -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="../static/index.js"></script>
 
 </head>
 
 <body>
-
     <div class="container" id="app">
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs">
-            <li class="active"><a class="nav-link active" data-toggle="tab" href="#About">About</a>
-            </li>
-            
-            <li v-for="item in data ">
-                <a class="nav-link" data-toggle="tab" href="#knob">Knob {{ data }} </a>
-            </li>
-        </ul>
+        <div class="nav nav-tabs">
+            <a class="nav-link active" data-toggle="tab" href="#About">About</a>
+            <a v-for="(item,index) in settings" class="nav-link" data-toggle="tab" :href="'#knob'+index">Knob {{ index + 1 }}</a>
+        </div>
 
 
         <!--Tab panes-->
         <div class="tab-content">
             <div id="About" class="tab-pane active">
-                This is an about page, this is a WIP-and our first application written in golang
+                This is an about page, this is a WIP-and our first application written in golang and vue.js
             </div>
 
-            <div id="knob" class="tab-pane fade>">
+            <div v-for="(item,index) in settings" :id="'knob'+index" class="tab-pane fade>">
                 <div class="form-group col-sm-6">
                     <label for="knobselect">Knob  function:</label>
-                    <select class="form-control" id="knobselect">
-                        <option></option>
+                    <select class="form-control" id="knobselect" v-model="choice">
+                        <option v-for="operation in rotationFunc">
+                            {{ operation }}
+                        </option>
                     </select>
+                    <div v-show="choice != 'Applicationvolume'">
+                        <label :for="'applist'+index">App list</label>
+                        <input type="text" :id="'applist'+index" class="form-control">
+                    </div>
                     <label for="buttonselect">Button function:</label>
                     <select class="form-control" id="buttonselect">
-                        
+                        <option v-for="item in buttonFunc">
+                            {{ item }}
+                        </option>
                     </select>
                 </div>
             </div>
@@ -61,4 +63,22 @@
     </div>
 </body>
 
+<script>
+        var app = new Vue({
+            el:'#app',
+            data:{
+                settings: [],
+                rotationFunc: ["Systemvolume","Applicationvolume"],
+                buttonFunc: ["System mute", "Application mute"]
+
+            },
+            mounted() {
+                var self = this;
+                $.getJSON('./settings', function(data){
+                    self.settings = data['Settings'];
+                });
+            }
+        });
+        
+        </script>
 </html>
