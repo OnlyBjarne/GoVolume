@@ -22,6 +22,16 @@ type Settings struct {
 			Apps []interface{} `json:"apps"`
 		} `json:"Button"`
 	} `json:"Settings"`
+	Operations struct {
+		Rotation []struct {
+			Name  string `json:"name"`
+			Value string `json:"value"`
+		} `json:"Rotation"`
+		Button []struct {
+			Name  string `json:"name"`
+			Value string `json:"value"`
+		} `json:"Button"`
+	} `json:"Operations"`
 }
 
 func main() {

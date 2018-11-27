@@ -23,7 +23,8 @@
         <!-- Nav tabs -->
         <div class="nav nav-tabs">
             <a class="nav-link active" data-toggle="tab" href="#About">About</a>
-            <a v-for="(item,index) in settings" class="nav-link" data-toggle="tab" :href="'#knob'+index">Knob {{ index + 1 }}</a>
+            <a v-for="(item,index) in settings" class="nav-link" data-toggle="tab" :href="'#knob'+index">Knob {{ index
+                + 1 }}</a>
         </div>
 
 
@@ -35,22 +36,22 @@
 
             <div v-for="(item,index) in settings" :id="'knob'+index" class="tab-pane fade>">
                 <div class="form-group col-sm-6">
-                    <label for="knobselect">Knob  function:</label>
-                    <select class="form-control" id="knobselect" v-model="choice">
-                        <option v-for="operation in rotationFunc">
-                            {{ operation }}
-                        </option>
+                    <label for="knobselect">Knob function:</label>
+                    <select class="form-control" :id="'knobselect'+index" v-model="rotationSelected[index]">
+                        <option v-for="operation in rotationFunc" v-bind:value="operation.value">{{ operation.name }}</option>
                     </select>
-                    <div v-show="choice != 'Applicationvolume'">
-                        <label :for="'applist'+index">App list</label>
-                        <input type="text" :id="'applist'+index" class="form-control">
+                    <div v-show="rotationSelected[index] != 'sysvolume'">
+                        <label :for="'rotationapplist'+index">App list</label>
+                        <input type="text" id="'rotationapplist'+index" class="form-control" v-model="rotationApps[index]">
                     </div>
                     <label for="buttonselect">Button function:</label>
-                    <select class="form-control" id="buttonselect">
-                        <option v-for="item in buttonFunc">
-                            {{ item }}
-                        </option>
+                    <select class="form-control" id="'buttonselect'+index" v-model="buttonSelected[index]">
+                        <option v-for="operation in buttonFunc" :value="operation.value">{{ operation.name }}</option>
                     </select>
+                    <div v-show="buttonSelected[index] != 'sysmute'">
+                        <label :for="'buttonapplist'+index">App list</label>
+                        <input type="text" :id="'buttonapplist'+index" class="form-control" v-model="buttonApps[index]">
+                    </div>
                 </div>
             </div>
         </div>
@@ -64,21 +65,40 @@
 </body>
 
 <script>
-        var app = new Vue({
-            el:'#app',
-            data:{
-                settings: [],
-                rotationFunc: ["Systemvolume","Applicationvolume"],
-                buttonFunc: ["System mute", "Application mute"]
+    var app = new Vue({
+        el: '#app',
+        data: {
+            settings: [],
+            rotationFunc: [],
+            buttonFunc: [],
+            rotationSelected: [],
+            buttonSelected: [],
+            rotationApps: [],
+            buttonApps: []
 
-            },
-            mounted() {
-                var self = this;
-                $.getJSON('./settings', function(data){
-                    self.settings = data['Settings'];
+        },
+        mounted() {
+            var self = this;
+            $.getJSON('./settings', function (data) {
+                self.settings = data.Settings;
+                self.rotationFunc = data.Operations.Rotation;
+                self.buttonFunc = data.Operations.Button;
+
+                data.Settings.forEach(element => {
+                    self.rotationSelected.push(element.Rotation.func);
+                    self.rotationApps.push(element.Rotation.apps);
+                    self.buttonSelected.push(element.Button.func);
+                    self.buttonApps.push(element.Button.apps);
+
                 });
-            }
-        });
-        
-        </script>
+
+                
+
+
+            });
+
+        }
+    });
+</script>
+
 </html>
